@@ -3,6 +3,7 @@
 namespace Wikibot\Api;
 
 use Wikibot\Api\Modules\CategoryMembers;
+use Wikibot\Api\Modules\Wikibase\GetEntities;
 use WikiClient\MediaWiki\ApiClient;
 use WikiClient\MediaWiki\User;
 use WikiClient\MediaWiki\WikiFactory;
@@ -24,6 +25,8 @@ class ApiModuleFactory {
 		switch ( $moduleName ) {
 			case 'categorymembers':
 				return new CategoryMembers( $client );
+			case 'wbgetentities':
+				return new GetEntities( $client );
 			default:
 				throw new \InvalidArgumentException( "$moduleName module not found." );
 		}
