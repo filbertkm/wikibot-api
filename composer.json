@@ -16,9 +16,10 @@
     "data-values/serialization": "~1.0",
     "wikibase/data-model": "~2.0",
     "wikibase/data-model-serialization": "~1.2",
-	"wikibase/store": "dev-master",
+    "wikibase/store": "dev-master",
     "wikiclient/wikiclient": "dev-master"
   },
+  "minimum-stability": "dev",
   "require-dev": {
     "phpunit/phpunit": "3.7.*"
   },
