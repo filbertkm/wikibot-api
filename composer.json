@@ -1,0 +1,25 @@
+{
+	"name": "wikibot/api",
+    "type": "library",
+    "description": "MediaWiki api client library",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/filbertkm/WikiClient.git"
+		}
+	],
+	"require": {
+		"wikibase/data-model": "~1.0",
+		"wikibase/data-model-serialization": "~1.1",
+		"wikibase/internal-serialization": "~1.2",
+		"wikiclient/wikiclient": "dev-master"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Wikibot\\Api\\": "src"
+		}
+	}
+}
