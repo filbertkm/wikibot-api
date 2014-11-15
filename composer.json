@@ -13,8 +13,10 @@
     }
   ],
   "require": {
+    "data-values/serialization": "~1.0",
     "wikibase/data-model": "~2.0",
-    "wikibase/store": "dev-master",
+    "wikibase/data-model-serialization": "~1.2",
+	"wikibase/store": "dev-master",
     "wikiclient/wikiclient": "dev-master"
   },
   "require-dev": {
