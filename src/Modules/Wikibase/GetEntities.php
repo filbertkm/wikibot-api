@@ -31,17 +31,21 @@ class GetEntities {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @return array
+	 * @return Entity
 	 */
 	public function getByEntityId( EntityId $entityId ) {
+		$prefixedId = $entityId->getSerialization();
+
 		$params = array(
 			'action' => 'wbgetentities',
-			'ids' => $entityId->getSerialization()
+			'ids' => $prefixedId
 		);
 
 		$json = $this->request( $params );
 
-		return $this->handleResponse( $json );
+		$data = $this->handleResponse( $json );
+
+		return $this->extractEntityFromResponse( $prefixedId, $data );
 	}
 
 	private function extractEntityFromResponse( $prefixedId, array $data ) {
