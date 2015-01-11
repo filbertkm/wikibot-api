@@ -4,23 +4,24 @@ namespace Wikibot\Api;
 
 use Wikibot\Api\Modules\CategoryMembers;
 use Wikibot\Api\Modules\Wikibase\GetEntities;
-use WikiClient\MediaWiki\ApiClient;
-use WikiClient\MediaWiki\User;
-use WikiClient\MediaWiki\WikiFactory;
+use WikiClient\MediaWiki\ApiClientFactory;
 
 class ApiModuleFactory {
 
 	/**
-	 * @var array
+	 * @var ApiClientFactory
 	 */
-	private $wikis;
+	private $clientFactory;
 
-	public function __construct( array $wikis ) {
-		$this->wikis = $wikis;
+	/**
+	 * @param ApiClientFactory $clientFactory
+	 */
+	public function __construct( ApiClientFactory $clientFactory ) {
+		$this->clientFactory = $clientFactory;
 	}
 
 	public function newModule( $siteId, $moduleName ) {
-		$client = $this->newApiClient( $siteId );
+		$client = $this->clientFactory->getClient( $siteId );
 
 		switch ( $moduleName ) {
 			case 'categorymembers':
@@ -30,20 +31,6 @@ class ApiModuleFactory {
 			default:
 				throw new \InvalidArgumentException( "$moduleName module not found." );
 		}
-	}
-
-	private function newApiClient( $siteId ) {
-		$wikiFactory = new WikiFactory( $this->wikis );
-		$wiki = $wikiFactory->newWiki( $siteId );
-
-		$userInfo = $this->wikis[$siteId]['user'];
-		$user = new User(
-			$userInfo['username'],
-			$userInfo['password'],
-			$this->wikis[$siteId]
-		);
-
-		return new ApiClient( $wiki, $user );
 	}
 
 }
